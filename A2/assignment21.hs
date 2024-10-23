@@ -6,9 +6,22 @@ transposeMatrix matrix = case matrix of
     []:_    -> []
     _       -> map head matrix : transposeMatrix (map tail matrix)
 
--- --Question 2
--- groupByPredicate :: (a -> Bool) -> [a] -> [[a]]
--- -- write your code here --
+-- Question 2
+groupByPredicate :: (a -> Bool) -> [a] -> [[a]]
+groupByPredicate _ [] = []
+groupByPredicate func (x:xs)
+    | func x    = trueList [x] xs
+    | otherwise = falseList [x] xs
+  where
+    trueList accumulated [] = [accumulated]
+    trueList accumulated (y:ys)
+        | func y    = trueList (accumulated ++ [y]) ys
+        | otherwise = accumulated : groupByPredicate func (y:ys)
+
+    falseList accumulated [] = [accumulated]
+    falseList accumulated (y:ys)
+        | not (func y) = falseList (accumulated ++ [y]) ys
+        | otherwise    = accumulated : groupByPredicate func (y:ys)
 
 
 -- --Question 3
