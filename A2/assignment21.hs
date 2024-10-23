@@ -28,12 +28,24 @@ groupByPredicate func (x:xs)
 --Question 3
 data Movie = Movie { title :: String, rating :: Float, genre :: String } deriving Show
 
+movies :: [Movie]
+movies = [
+    Movie "Inception" 8.8 "Sci-Fi",
+    Movie "The Matrix" 8.7 "Sci-Fi",
+    Movie "Jaws" 7.9 "Thriller",
+    Movie "Frozen" 7.4 "Animation",
+    Movie "Interstellar" 8.6 "Sci-Fi",
+    Movie "The Godfather" 9.7 "Crime",
+    Movie "Toy Story" 8.3 "Animation"
+    ]
+
 topRatedMovies :: [Movie] -> Float -> [String]
 -- write your code for here --
 topRatedMovies movies threshold = map title (filter (\movie -> rating movie > threshold) movies)
 
--- moviesByGenre :: [Movie] -> String -> [String]
--- -- write your code here --
+moviesByGenre :: [Movie] -> String -> [String]
+-- write your code here --
+moviesByGenre movies selected_genre = map title (filter (\movie -> genre movie == selected_genre) movies)
 
 -- adjustedRatings :: [Movie] -> [Movie]
 -- -- write your code here --
