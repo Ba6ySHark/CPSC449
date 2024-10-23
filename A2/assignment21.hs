@@ -8,6 +8,7 @@ transposeMatrix matrix = case matrix of
 
 -- Question 2
 groupByPredicate :: (a -> Bool) -> [a] -> [[a]]
+-- write your code here -- 
 groupByPredicate _ [] = []
 groupByPredicate func (x:xs)
     | func x    = trueList [x] xs
@@ -24,11 +25,12 @@ groupByPredicate func (x:xs)
         | otherwise    = accumulated : groupByPredicate func (y:ys)
 
 
--- --Question 3
--- data Movie = Movie { title :: String, rating :: Float, genre :: String } deriving Show
+--Question 3
+data Movie = Movie { title :: String, rating :: Float, genre :: String } deriving Show
 
--- topRatedMovies :: [Movie] -> Float -> [String]
--- -- write your code for here --
+topRatedMovies :: [Movie] -> Float -> [String]
+-- write your code for here --
+topRatedMovies movies threshold = map title (filter (\movie -> rating movie > threshold) movies)
 
 -- moviesByGenre :: [Movie] -> String -> [String]
 -- -- write your code here --
