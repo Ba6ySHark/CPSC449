@@ -51,6 +51,14 @@ adjustedRatings :: [Movie] -> [Movie]
 -- write your code here --
 adjustedRatings = map (\movie -> movie { rating = min (10.0) (rating movie + 0.5) })
 
--- --Question 4
--- mergeSort :: Ord a => [a] -> [a]
--- -- write your code here --
+--Question 4
+mergeSort :: Ord a => [a] -> [a]
+-- write your code here --
+mergeSort [] = []
+mergeSort [x] = [x]
+mergeSort xs = merge (mergeSort left) (mergeSort right)
+  where
+    (left, right) = splitAt (div (length xs)  2) xs
+    merge [] ys = ys
+    merge xs [] = xs
+    merge (x:xs) (y:ys) = if x <= y then x : merge xs (y:ys) else y : merge (x:xs) ys
