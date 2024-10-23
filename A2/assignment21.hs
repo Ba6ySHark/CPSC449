@@ -47,9 +47,9 @@ moviesByGenre :: [Movie] -> String -> [String]
 -- write your code here --
 moviesByGenre movies selected_genre = map title (filter (\movie -> genre movie == selected_genre) movies)
 
--- adjustedRatings :: [Movie] -> [Movie]
--- -- write your code here --
-
+adjustedRatings :: [Movie] -> [Movie]
+-- write your code here --
+adjustedRatings = map (\movie -> movie { rating = min (10.0) (rating movie + 0.5) })
 
 -- --Question 4
 -- mergeSort :: Ord a => [a] -> [a]
