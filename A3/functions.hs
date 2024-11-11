@@ -9,15 +9,20 @@ fst' = uncurry (\x _ -> x)
 snd' :: (a, b) -> b
 snd' = uncurry (\_ y -> y)
 
--- -- Question 2
--- matrixAddition :: [[Int]] -> [[Int]] -> [[Int]]
--- -- write your code here --
+-- Question 2.a
+matrixAddition :: [[Int]] -> [[Int]] -> [[Int]]
+matrixAddition = zipWith (zipWith (+))
 
--- scalarMultiply :: Int -> [[Int]] -> [[Int]]
--- -- write your code here --
+-- Question 2.b
+scalarMultiply :: Int -> [[Int]] -> [[Int]]
+scalarMultiply scalar = map (map (* scalar))
+-- Partial application example:
+-- let doubleMatrix = scalarMultiply 2
+-- doubleMatrix [[1, 2], [3, 4]]
 
--- matrixTrace :: [[Int]] -> Int
--- -- write your code here --
+-- Question 2.c
+matrixTrace :: [[Int]] -> Int
+matrixTrace matrix = foldr (+) 0 (zipWith (!!) matrix [0..])
 
 -- -- Question 3
 -- class Shape a where
