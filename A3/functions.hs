@@ -37,14 +37,38 @@ instance Shape Circle where
 instance Shape Rectangle where
     area (Rectangle l w) = l * w
 
--- -- Question 4
--- data AVLTree a = Empty | Node a (AVLTree a) (AVLTree a)
+-- Question 4
+data AVLTree a = Empty | Node a (AVLTree a) (AVLTree a)
 
--- heightAVL :: AVLTree a -> Int
--- -- write your code here --
+-- Question 4.a
+heightAVL :: AVLTree a -> Int
+heightAVL Empty = -1
+heightAVL (Node _ left right) = (max (heightAVL left) (heightAVL right)) + 1
 
--- isOrdered :: (Ord a) => AVLTree a -> Bool
--- -- write your code here --
+-- Question 4.b
+isOrdered :: (Ord a) => AVLTree a -> Bool
+isOrdered Empty = True
+isOrdered (Node value left right) =
+  (allNodes (< value) left) &&
+  (allNodes (> value) right) &&
+  isOrdered left &&
+  isOrdered right
+  where
+    allNodes :: (a -> Bool) -> AVLTree a -> Bool
+    allNodes _ Empty = True
+    allNodes condition (Node v l r) = 
+      condition v && allNodes condition l && allNodes condition r
 
--- isBalanced :: AVLTree a -> Bool
--- -- write your code here --
+-- Question 4.c
+isBalanced :: AVLTree a -> Bool
+isBalanced Empty = True
+isBalanced (Node _ left right) =
+  abs (heightAVL left - heightAVL right) <= 1 &&
+  isBalanced left &&
+  isBalanced right
+
+-- For testing in ghci (unbalalanced tree)
+-- let tree = Node 10 (Node 5 (Node 2 Empty Empty) Empty) (Node 15 Empty Empty)
+-- heightAVL tree // (expected 2)
+-- isOrdered tree // (expected true)
+-- isBalanced tree // (expected false)
