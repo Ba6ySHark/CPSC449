@@ -24,17 +24,18 @@ scalarMultiply scalar = map (map (* scalar))
 matrixTrace :: [[Int]] -> Int
 matrixTrace matrix = foldr (+) 0 (zipWith (!!) matrix [0..])
 
--- -- Question 3
--- class Shape a where
---     area :: a -> Double
--- data Circle = Circle Double
--- data Rectangle = Rectangle Double Double
+-- Question 3
+class Shape a where
+    area :: a -> Double
 
--- instance Shape Circle where
---     area -- write your code here --
+data Circle = Circle Double
+data Rectangle = Rectangle Double Double
 
--- instance Shape Rectangle where
---     area -- write your code here --
+instance Shape Circle where
+    area (Circle r) = pi * r^2
+
+instance Shape Rectangle where
+    area (Rectangle l w) = l * w
 
 -- -- Question 4
 -- data AVLTree a = Empty | Node a (AVLTree a) (AVLTree a)
